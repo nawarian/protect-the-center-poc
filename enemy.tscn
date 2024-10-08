@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://cs8ktao68q5cg"]
+
+[ext_resource type="Script" path="res://enemy.gd" id="1_6upp2"]
+[ext_resource type="Texture2D" uid="uid://o1u4dm28wgke" path="res://assets/scribble-platformer/PNG/Retina/character_roundRed.png" id="2_7hebi"]
+[ext_resource type="Texture2D" uid="uid://dglokqeogd04o" path="res://assets/scribble-platformer/PNG/Retina/character_roundPurple.png" id="3_kqy1l"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x7uf6"]
+radius = 36.0
+height = 118.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yuasx"]
+radius = 37.0
+height = 118.0
+
+[node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
+collision_layer = 2
+script = ExtResource("1_6upp2")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_x7uf6")
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+position = Vector2(-64, -64)
+texture_normal = ExtResource("2_7hebi")
+texture_pressed = ExtResource("3_kqy1l")
+shape = SubResource("CapsuleShape2D_yuasx")
+
+[connection signal="pressed" from="TouchScreenButton" to="." method="_on_touch_screen_button_pressed"]
+[connection signal="released" from="TouchScreenButton" to="." method="_on_touch_screen_button_released"]
